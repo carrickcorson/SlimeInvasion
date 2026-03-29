@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rtento1gfm3m"
-path="res://.godot/imported/exit_portal.png-78fdfb4ffbc78f612a72fdb19c41b974.ctex"
+uid="uid://cgbocuqn74q2a"
+path="res://.godot/imported/poop_rotating_shimmer.png-a1d6d2c79672e2aeb7d1ca808105666b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Sprites/exit_portal.png"
-dest_files=["res://.godot/imported/exit_portal.png-78fdfb4ffbc78f612a72fdb19c41b974.ctex"]
+source_file="res://Assets/Art/Sprites/poop_rotating_shimmer.png"
+dest_files=["res://.godot/imported/poop_rotating_shimmer.png-a1d6d2c79672e2aeb7d1ca808105666b.ctex"]
 
 [params]
 

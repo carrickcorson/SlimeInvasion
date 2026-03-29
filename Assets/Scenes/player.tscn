@@ -110,12 +110,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(2, 5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 disable_mode = 1
-collision_mask = 3
+collision_mask = 197376
 script = ExtResource("1_onrkg")
-Speed = 30.0
-JumpVelocity = -80.0
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -130,12 +128,15 @@ shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -12)
-zoom = Vector2(4, 4)
+zoom = Vector2(10, 10)
+limit_enabled = false
 limit_left = 0
 limit_top = 12
 limit_right = 320
-limit_bottom = 252
+limit_bottom = 192
 limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 editor_draw_limits = true
 
 [node name="IdleTimer" type="Timer" parent="."]
