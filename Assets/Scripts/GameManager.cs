@@ -6,14 +6,18 @@ public partial class GameManager : Node2D
 {
 	private Node2D _levelContainer;
 	private Player _player;
+	private Hud _hud;
+	private PoopManager _poopManager;
 
 	private int _level = 1;
+	private int _poopCount = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _Ready()
 	{
 		_levelContainer = GetNode<Node2D>("Level");
 		_player = GetNode<Player>("Player");
+		_hud = GetNode<Hud>("CanvasLayer/HUD");
 
 		try
 		{
@@ -71,6 +75,12 @@ public partial class GameManager : Node2D
 			return;
 		}
 		levelManager.LevelCompleted += NextLevel;
+
+		// Get the poop manager for the loaded level and set up required signals
+		_poopManager = GetNode<PoopManager>("Level/Level" + level.ToString() + "/PoopManager");
+		_poopManager.PoopCollected += _hud.UpdatePoopCount;
+		_hud.ResetHud(_poopManager.poopRequired);
+
 
 		// Teleport player to start position
 		Marker2D playerStartPosition = GetTree().GetFirstNodeInGroup("player_start_position") as Marker2D;

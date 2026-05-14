@@ -161,7 +161,7 @@ public partial class Player : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public async Task TeleportToLocation(Vector2 new_position)
+	public void TeleportToLocation(Vector2 new_position)
 	{
 		Camera2D camera = GetNode<Camera2D>("Camera2D");
 
