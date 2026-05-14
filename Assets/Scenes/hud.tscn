@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dbwt78gqoee1g"]
+
+[ext_resource type="Texture2D" uid="uid://bqpmh5iskc6eu" path="res://Assets/Art/Sprites/poop_thumbnail.png" id="1_71ymp"]
+[ext_resource type="Script" uid="uid://cq5guk0amkqd2" path="res://Assets/Scripts/Hud.cs" id="1_xs5ck"]
+[ext_resource type="FontFile" uid="uid://cjyyyycdoawwa" path="res://Assets/Art/Fonts/Kenney Mini Square Mono.ttf" id="2_th0pt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xs5ck"]
+font = ExtResource("2_th0pt")
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_th0pt"]
+font = ExtResource("2_th0pt")
+font_size = 36
+
+[node name="HUD" type="Control" unique_id=853115989]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xs5ck")
+
+[node name="PoopTexture" type="TextureRect" parent="." unique_id=394860384]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 32.0
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 88.0
+texture = ExtResource("1_71ymp")
+stretch_mode = 4
+
+[node name="PoopLabel" type="Label" parent="PoopTexture" unique_id=1209851895]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -24.0
+offset_right = 344.0
+offset_bottom = 24.0
+grow_vertical = 2
+text = "x 0/3"
+label_settings = SubResource("LabelSettings_xs5ck")
+
+[node name="PortalLabel" type="Label" parent="." unique_id=212096230]
+layout_mode = 1
+offset_left = 720.0
+offset_top = 40.0
+offset_right = 1233.0
+offset_bottom = 85.0
+text = "Portal is closed..."
+label_settings = SubResource("LabelSettings_th0pt")
+horizontal_alignment = 2
