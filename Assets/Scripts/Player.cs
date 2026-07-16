@@ -11,8 +11,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public float gravityDivisor = 3.0f;
 
-	public Vector2 _screenSize;
-
+	private Vector2 _screenSize;
 	private AnimatedSprite2D _animatedSprite;
 	private bool _doubleJumpFlag = false;
 	private bool _idleFlag = false;
@@ -36,20 +35,39 @@ public partial class Player : CharacterBody2D
 			if (velocity.Y > 0)
 			{
 				// Falling
-				_animatedSprite.Play("fall");
-				_animatedSprite.FlipH = velocity.X < 0;
+				if (velocity.X > 0)
+				{
+					_animatedSprite.Play("fall_left");
+				}
+				else
+				{
+					_animatedSprite.Play("fall_right");
+				}
+
 			}
 			else if (velocity.Y < 0)
 			{
 				// Jumping
-				_animatedSprite.Play("jump");
-				_animatedSprite.FlipH = velocity.X < 0;
+				if (velocity.X > 0)
+				{
+					_animatedSprite.Play("jump_left");
+				}
+				else
+				{
+					_animatedSprite.Play("jump_right");
+				}
 			}
 			else
 			{
 				// Walking
-				_animatedSprite.Play("walk");
-				_animatedSprite.FlipH = velocity.X < 0;
+				if (velocity.X > 0)
+				{
+					_animatedSprite.Play("walk_left");
+				}
+				else
+				{
+					_animatedSprite.Play("walk_right");
+				}
 			}
 			// Stop idle processes if movement occurs
 			_idleFlag = false;
@@ -58,6 +76,7 @@ public partial class Player : CharacterBody2D
 		}
 		else
 		{
+			// TODO: Draw new idle animation
 			if (_idleFlag)
 			{
 				// Idling

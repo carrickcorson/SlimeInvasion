@@ -9,9 +9,10 @@ public partial class PoopManager : Node2D
 	[Signal]
 	public delegate void PoopCollectedEventHandler(int amount, int total);
 
-	private int _poopCollected = 0;
 	public int poopRequired = 0;
 
+	private int _poopCollected = 0;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
