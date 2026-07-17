@@ -31,6 +31,10 @@ region = Rect2(64, 48, 16, 16)
 atlas = ExtResource("2_7dd06")
 region = Rect2(80, 48, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jjye"]
+atlas = ExtResource("2_7dd06")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_lerqx"]
 atlas = ExtResource("2_7dd06")
 region = Rect2(64, 32, 16, 16)
@@ -38,10 +42,6 @@ region = Rect2(64, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jp3cw"]
 atlas = ExtResource("2_7dd06")
 region = Rect2(80, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jjye"]
-atlas = ExtResource("2_7dd06")
-region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ecf78"]
 atlas = ExtResource("2_7dd06")
@@ -173,6 +173,9 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jjye")
+}, {
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_lerqx")
 }, {
@@ -181,9 +184,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lerqx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jjye")
 }],
 "loop": 1,
 "name": &"idle_right",
@@ -296,8 +296,7 @@ script = ExtResource("1_onrkg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=644255013]
 sprite_frames = SubResource("SpriteFrames_c8jh0")
-animation = &"jump_left"
-frame_progress = 0.5746525
+animation = &"idle_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651810143]
 position = Vector2(-2, 2)
