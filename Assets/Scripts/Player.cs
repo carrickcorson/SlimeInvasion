@@ -15,6 +15,7 @@ public partial class Player : CharacterBody2D
 	private AnimatedSprite2D _animatedSprite;
 	private bool _doubleJumpFlag = false;
 	private bool _idleFlag = false;
+	private bool movedRight = true;
 
 
 	public override void _Ready()
@@ -32,41 +33,50 @@ public partial class Player : CharacterBody2D
 		// Animation Logic
 		if (velocity.Length() > 0)
 		{
+			if (velocity.X > 0)
+			{
+				movedRight = true;
+			}
+			else if (velocity.X < 0)
+			{
+				movedRight = false;
+			}
+
 			if (velocity.Y > 0)
 			{
 				// Falling
-				if (velocity.X > 0)
+				if (movedRight)
 				{
-					_animatedSprite.Play("fall_left");
+					_animatedSprite.Play("fall_right");
 				}
 				else
 				{
-					_animatedSprite.Play("fall_right");
+					_animatedSprite.Play("fall_left");
 				}
 
 			}
 			else if (velocity.Y < 0)
 			{
 				// Jumping
-				if (velocity.X > 0)
+				if (movedRight)
 				{
-					_animatedSprite.Play("jump_left");
+					_animatedSprite.Play("jump_right");
 				}
 				else
 				{
-					_animatedSprite.Play("jump_right");
+					_animatedSprite.Play("jump_left");
 				}
 			}
 			else
 			{
 				// Walking
-				if (velocity.X > 0)
+				if (movedRight)
 				{
-					_animatedSprite.Play("walk_left");
+					_animatedSprite.Play("walk_right");
 				}
 				else
 				{
-					_animatedSprite.Play("walk_right");
+					_animatedSprite.Play("walk_left");
 				}
 			}
 			// Stop idle processes if movement occurs
@@ -80,12 +90,27 @@ public partial class Player : CharacterBody2D
 			if (_idleFlag)
 			{
 				// Idling
-				_animatedSprite.Play("idle");
+				if (movedRight)
+				{
+					_animatedSprite.Play("idle_right");
+				}
+				else
+				{
+					_animatedSprite.Play("idle_left");
+				}
 			}
 			else
 			{
 				// Pre-Idling
-				_animatedSprite.Play("stand");
+				if (movedRight)
+				{
+					_animatedSprite.Play("stand_right");
+				}
+				else
+				{
+					_animatedSprite.Play("stand_left");
+				}
+
 				if (idleTimer.IsStopped())
 				{
 					idleTimer.Start();
