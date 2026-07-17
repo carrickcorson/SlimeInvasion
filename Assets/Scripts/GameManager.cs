@@ -7,10 +7,8 @@ public partial class GameManager : Node2D
 	private Node2D _levelContainer;
 	private Player _player;
 	private Hud _hud;
-	private PoopManager _poopManager;
 
 	private int _level = 1;
-	private int _poopCount = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _Ready()
@@ -29,6 +27,7 @@ public partial class GameManager : Node2D
 		}
 	}
 
+	// Called when the level is completed
 	public async void NextLevel()
 	{
 		_level += 1;
@@ -42,8 +41,10 @@ public partial class GameManager : Node2D
 		}
 	}
 
+	// Load a specified level number
 	private async Task LoadLevel(int level)
-	{
+	{	
+		// Load the specified level as a packed scene
 		string levelDirPath = "res://Assets/Scenes/Levels/";
 		string level_path = levelDirPath + "level_" + level + ".tscn";
 		PackedScene scene = ResourceLoader.Load<PackedScene>(level_path);
@@ -51,7 +52,8 @@ public partial class GameManager : Node2D
 		// Catch if the scene does not exist at level_path
 		if (scene == null)
 		{
-			GD.Print("[WARNING] Failed to load Level " + level.ToString());
+			GD.Print("[ERROR] Failed to load Level " + level.ToString() + ", Exiting...");
+			GetTree().Quit();
 			return;
 		}
 
@@ -67,19 +69,30 @@ public partial class GameManager : Node2D
 		_levelContainer.AddChild(level_instance);
 		GD.Print("[DEBUG] Player has entered Level " + level.ToString());
 
-		// Get the level manager for the loaded level
-		LevelManager levelManager = GetNodeOrNull<LevelManager>("Level/Level" + level.ToString());
-		if (levelManager == null)
+		// Get the Exit Portal for the loaded level
+		ExitPortal exitPortal = GetNodeOrNull<ExitPortal>("Level/Level" + level.ToString() + "/ExitPortal");
+		if (exitPortal == null)
 		{
-			GD.Print("[ERROR] Failed to load LevelManager for Level " + level.ToString());
+			GD.Print("[ERROR] Failed to load Exit Portal for Level " + level.ToString());
 			return;
 		}
-		levelManager.LevelCompleted += NextLevel;
 
-		// Get the poop manager for the loaded level and set up required signals
-		_poopManager = GetNode<PoopManager>("Level/Level" + level.ToString() + "/PoopManager");
-		_poopManager.PoopCollected += _hud.UpdatePoopCount;
-		_hud.ResetHud(_poopManager.poopRequired);
+		// Get the Poop Manager for the loaded level
+		PoopManager poopManager = GetNodeOrNull<PoopManager>("Level/Level" + level.ToString() + "/PoopManager");
+		if (poopManager == null)
+		{
+			GD.Print("[ERROR] Failed to load Poop Manager for Level " + level.ToString());
+			return;
+		}
+		
+		// Initialise Exit Portal controls for the loaded level
+		exitPortal.LevelCompleted += NextLevel;
+		poopManager.PoopThresholdReached += exitPortal.PoopThresholdReached;
+
+		// Initialise HUD controls for the loaded level
+		poopManager.PoopCollected += _hud.UpdatePoopCount;
+		poopManager.PoopThresholdReached += _hud.PortalOpened;
+		_hud.ResetHud(poopManager.poopRequired);
 
 
 		// Teleport player to start position

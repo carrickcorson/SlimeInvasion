@@ -22,16 +22,10 @@ public partial class Poop : Area2D
 	private void OnBodyEntered(Node2D body)
 	{
 		if (body is Player)
-		{
+		{	
+			// Remove the poop from the scene and emit signal
 			QueueFree();
-			GD.Print("Player has gathered some poop!");
-
-			CollectPoop();
+			EmitSignal(SignalName.PoopCollected);
 		}
-	}
-
-	private void CollectPoop()
-	{
-		EmitSignal(SignalName.PoopCollected);
 	}
 }

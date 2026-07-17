@@ -5,6 +5,12 @@ public partial class ExitPortal : Area2D
 	[Signal]
 	public delegate void LevelCompletedEventHandler();
 
+	[Signal]
+	public delegate void PortalOpenedEventHandler();
+
+	[Signal]
+	public delegate void PortalClosedEventHandler();
+
 	private AnimatedSprite2D _animatedSprite2D;
 	private CollisionShape2D _collisionShape;
 
@@ -37,11 +43,13 @@ public partial class ExitPortal : Area2D
 	public void Open()
 	{
 		_exitOpen = true;
+		EmitSignal(SignalName.PortalOpened);
 	}
 
 	public void Close()
 	{
 		_exitOpen = false;
+		EmitSignal(SignalName.PortalClosed);
 	}
 
 	public void PoopThresholdReached()
@@ -53,13 +61,7 @@ public partial class ExitPortal : Area2D
 	{
 		if (body is Player && _exitOpen)
 		{
-			CompleteLevel();
+			EmitSignal(SignalName.LevelCompleted);
 		}
-	}
-
-
-	private void CompleteLevel()
-	{
-		EmitSignal(SignalName.LevelCompleted);
 	}
 }
