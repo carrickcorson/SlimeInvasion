@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 public partial class Player : CharacterBody2D
 {
 	[Export]
-	public float speed = 25.0f;
+	public float speed = 30.0f;
 	[Export]
-	public float jumpVelocity = -80.0f;
+	public float jumpVelocity = -105.0f;
 	[Export]
 	public float gravityDivisor = 3.0f;
 
