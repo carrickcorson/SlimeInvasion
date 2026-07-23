@@ -1,95 +1,86 @@
-[gd_scene load_steps=12 format=3 uid="uid://djoru4qybvi1j"]
+[gd_scene format=3 uid="uid://djoru4qybvi1j"]
 
-[ext_resource type="Texture2D" uid="uid://cmxx363navkv0" path="res://Assets/Art/Sprites/green_slime.png" id="1_2d52u"]
 [ext_resource type="Script" uid="uid://b5jec8ftugfwv" path="res://Assets/Scripts/Slime.cs" id="1_5jc4t"]
+[ext_resource type="Texture2D" uid="uid://dwlif4n2cfunr" path="res://Assets/Art/Sprites/slime-green_16x16.png" id="2_fqgy7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bratd"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqgy7"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5b0gg"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(0, 8, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6v4q"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2002g"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(16, 8, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lmee"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jc4t"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(0, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj667"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jayke"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(0, 8, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp8j0"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ppcr1"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(16, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4l1t8"]
-atlas = ExtResource("1_2d52u")
-region = Rect2(8, 0, 8, 8)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tauvr"]
+atlas = ExtResource("2_fqgy7")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2002g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bratd")
+"texture": SubResource("AtlasTexture_fqgy7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5b0gg")
+"texture": SubResource("AtlasTexture_v6v4q")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
-"speed": 2.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2002g")
+"texture": SubResource("AtlasTexture_6lmee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pj667")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp8j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tauvr")
 }],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jc4t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jayke")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ppcr1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4l1t8")
-}],
-"loop": true,
+"loop": 1,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d52u"]
-size = Vector2(2, 4)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fqgy7"]
+radius = 3.0
+height = 12.0
 
-[node name="Slime" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iy5jj"]
+size = Vector2(20, 6)
+
+[node name="Slime" type="CharacterBody2D" unique_id=1196098699]
 collision_layer = 2
 script = ExtResource("1_5jc4t")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1781846133]
 sprite_frames = SubResource("SpriteFrames_2002g")
 animation = &"idle"
-frame_progress = 0.96462154
+frame_progress = 0.9292714
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=567216059]
+position = Vector2(0, 5)
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_2d52u")
+shape = SubResource("CapsuleShape2D_fqgy7")
 
-[node name="ChangeDirection" type="Timer" parent="."]
-wait_time = 1.5
-
-[connection signal="timeout" from="ChangeDirection" to="." method="OnChangeDirectionTimeout"]
+[node name="MovementBounds" type="CollisionShape2D" parent="." unique_id=108681668]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_iy5jj")

@@ -3,3 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bfw5bij824uws" path="res://Assets/Scenes/Levels/level_template.tscn" id="1_un3gw"]
 
 [node name="Level1" unique_id=311493454 instance=ExtResource("1_un3gw")]
+
+[node name="Poop1" parent="PoopManager" parent_id_path=PackedInt32Array(1813681663) index="0" unique_id=1930734793]
+position = Vector2(108, 687)
+
+[node name="Poop2" parent="PoopManager" parent_id_path=PackedInt32Array(1813681663) index="1" unique_id=1987187427]
+position = Vector2(216, 655)
+
+[node name="Poop3" parent="PoopManager" parent_id_path=PackedInt32Array(1813681663) index="2" unique_id=1940250876]
+position = Vector2(171, 671)
