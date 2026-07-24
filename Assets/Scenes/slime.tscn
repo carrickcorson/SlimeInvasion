@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://djoru4qybvi1j"]
 
-[ext_resource type="Script" uid="uid://b5jec8ftugfwv" path="res://Assets/Scripts/Slime.cs" id="1_5jc4t"]
 [ext_resource type="Texture2D" uid="uid://dwlif4n2cfunr" path="res://Assets/Art/Sprites/slime-green_16x16.png" id="2_fqgy7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fqgy7"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ypg8e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc4hl"]
 atlas = ExtResource("2_fqgy7")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6v4q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqgy7"]
 atlas = ExtResource("2_fqgy7")
 region = Rect2(16, 0, 16, 16)
 
@@ -27,14 +28,14 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("2_fqgy7")
 region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_2002g"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypg8e"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fqgy7")
+"texture": SubResource("AtlasTexture_jc4hl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v6v4q")
+"texture": SubResource("AtlasTexture_fqgy7")
 }],
 "loop": 1,
 "name": &"idle",
@@ -54,33 +55,28 @@ animations = [{
 "texture": SubResource("AtlasTexture_tauvr")
 }],
 "loop": 1,
-"name": &"walk",
+"name": &"move",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fqgy7"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8pqbh"]
 radius = 3.0
-height = 12.0
+height = 10.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iy5jj"]
-size = Vector2(20, 6)
+[node name="Node2D" type="Node2D" unique_id=1599198268]
 
-[node name="Slime" type="CharacterBody2D" unique_id=1196098699]
-collision_layer = 2
-script = ExtResource("1_5jc4t")
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1059296679]
+navigation_polygon = SubResource("NavigationPolygon_ypg8e")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1085890992]
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1781846133]
-sprite_frames = SubResource("SpriteFrames_2002g")
-animation = &"idle"
-frame_progress = 0.9292714
-metadata/_edit_group_ = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1179797837]
+sprite_frames = SubResource("SpriteFrames_ypg8e")
+animation = &"move"
+frame_progress = 0.05414898
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=567216059]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1194572366]
 position = Vector2(0, 5)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_fqgy7")
-
-[node name="MovementBounds" type="CollisionShape2D" parent="." unique_id=108681668]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_iy5jj")
+shape = SubResource("CapsuleShape2D_8pqbh")
