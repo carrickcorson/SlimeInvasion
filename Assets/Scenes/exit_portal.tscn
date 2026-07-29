@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b66hy86sf7bcg"]
+[gd_scene format=3 uid="uid://b66hy86sf7bcg"]
 
 [ext_resource type="Script" uid="uid://dmwmm6twcpv63" path="res://Assets/Scripts/ExitPortal.cs" id="1_3wt4d"]
 [ext_resource type="Texture2D" uid="uid://bq10cdho2dav4" path="res://Assets/Art/Sprites/exit_portal_active.png" id="2_3ern5"]
@@ -71,7 +71,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rq1d2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"active",
 "speed": 3.0
 }, {
@@ -100,21 +100,23 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5hjxj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dormant",
 "speed": 6.0
 }]
 
-[node name="ExitPortal" type="Area2D" groups=["exit_portal"]]
+[node name="ExitPortal" type="Area2D" unique_id=1062609584 groups=["exit_portal"]]
 collision_layer = 65536
 script = ExtResource("1_3wt4d")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749818102]
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_3wt4d")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=18684209]
 z_index = -10
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_bq2x3")
 animation = &"active"
 frame_progress = 0.75875807

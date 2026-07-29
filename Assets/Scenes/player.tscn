@@ -293,16 +293,19 @@ size = Vector2(6, 12)
 disable_mode = 1
 collision_mask = 197376
 script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=644255013]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_c8jh0")
 animation = &"idle_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651810143]
-position = Vector2(-2, 2)
+position = Vector2(-2, -6)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=549727389]
+position = Vector2(0, -8)
 offset = Vector2(0, -12)
 zoom = Vector2(10, 10)
 limit_enabled = false

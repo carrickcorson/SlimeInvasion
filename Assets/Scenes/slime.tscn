@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dwlif4n2cfunr" path="res://Assets/Art/Sprites/slime-green_16x16.png" id="2_fqgy7"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ypg8e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4i6m"]
+size = Vector2(44, 6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jc4hl"]
 atlas = ExtResource("2_fqgy7")
@@ -63,13 +64,18 @@ animations = [{
 radius = 3.0
 height = 10.0
 
-[node name="Node2D" type="Node2D" unique_id=1599198268]
+[node name="Slime" type="Node2D" unique_id=1599198268]
+metadata/_edit_group_ = true
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1059296679]
-navigation_polygon = SubResource("NavigationPolygon_ypg8e")
+[node name="Area2D" type="Area2D" parent="." unique_id=1700147483]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1148027423]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_p4i6m")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1085890992]
-metadata/_edit_group_ = true
+position = Vector2(0, -8)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1179797837]
 sprite_frames = SubResource("SpriteFrames_ypg8e")
