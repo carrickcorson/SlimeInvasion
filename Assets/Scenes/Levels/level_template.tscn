@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://p75b7pg0rlg8" path="res://Assets/Art/TileSets/overgrown_stones_tileset_16x16.png" id="3_ipruh"]
 [ext_resource type="PackedScene" uid="uid://b66hy86sf7bcg" path="res://Assets/Scenes/exit_portal.tscn" id="4_qhatf"]
 [ext_resource type="PackedScene" uid="uid://dpw65j1tuu18q" path="res://Assets/Scenes/poop.tscn" id="5_b6a4v"]
+[ext_resource type="PackedScene" uid="uid://djoru4qybvi1j" path="res://Assets/Scenes/slime.tscn" id="6_ipruh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
 texture = ExtResource("1_0nbhp")
@@ -273,3 +274,6 @@ position = Vector2(216, 651)
 
 [node name="Poop3" parent="PoopManager" unique_id=1940250876 instance=ExtResource("5_b6a4v")]
 position = Vector2(168, 668)
+
+[node name="Slime" parent="." unique_id=1599198268 instance=ExtResource("6_ipruh")]
+position = Vector2(168, 672)

@@ -59,10 +59,12 @@ move_down={
 [layer_names]
 
 2d_physics/layer_1="player"
+2d_physics/layer_2="slime"
 2d_physics/layer_9="ground"
 2d_physics/layer_10="one_way_ground"
 2d_physics/layer_17="exit_portal"
 2d_physics/layer_18="poop"
+2d_physics/layer_25="navigation_region"
 
 [rendering]
 

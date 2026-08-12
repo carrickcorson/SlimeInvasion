@@ -1,58 +1,54 @@
 using Godot;
 using System;
 
-public partial class Slime : CharacterBody2D
+public partial class Slime : Node2D
 {
-	[Export]
-	public float Speed = 20.0f;
-	[Export]
-	public Vector2 Direction = new Vector2(1.0f, 0.0f);
-	private AnimatedSprite2D _animatedSprite;
+	private CharacterBody2D _body;
+	private Area2D _movementArea;
+	private AnimatedSprite2D _animatedSprite2D;
 
-    public override void _Ready()
-    {	
-		// Initialise AnimatedSprite2D Node
-        _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+	private float _speed = 10.0f;
+	private Vector2 _direction = new Vector2(1.0f, 0.0f); // moving right
+	private float _gravityDivisor = 3.0f;
 
-		// Start ChangeDirection Timer
-		GetNode<Timer>("ChangeDirection").Start();
-    }
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		_body = GetNode<CharacterBody2D>("Body");
+		_animatedSprite2D = GetNode<AnimatedSprite2D>("Body/AnimatedSprite2D");
+		_movementArea = GetNode<Area2D>("MovementArea");
+		_movementArea.BodyExited += OnBodyExited;
+	}
 
-    public override void _Process(double delta)
-    {
-		Vector2 velocity = Velocity;
-
-		// Animation logic
-        if (velocity.Length() > 0)
-		{	
-			_animatedSprite.Play("walk");
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		if (Mathf.Abs(_body.Velocity.X) > 0)
+		{
+			_animatedSprite2D.Play("move");
 		}
 		else
 		{
-			_animatedSprite.Play("idle");
+			_animatedSprite2D.Play("idle");
 		}
+	}
+
+    public override void _PhysicsProcess(double delta)
+    {
+		Vector2 velocity = _body.Velocity;
+
+		velocity += _body.GetGravity() * (float)delta / _gravityDivisor;
+		velocity.X = _direction.X * _speed;
+
+		_body.Velocity = velocity;
+        _body.MoveAndSlide();
     }
 
-	public override void _PhysicsProcess(double delta)
+	private void OnBodyExited(Node2D body)
 	{
-		Vector2 velocity = Velocity;
-
-		// Add the gravity.
-		if (!IsOnFloor())
+		if (body is CharacterBody2D)
 		{
-			velocity += GetGravity() * (float)delta;
+			_direction.X *= -1.0f;
 		}
-
-		// Determine the Slime's movement
-		velocity.X = Direction.X * Speed;
-		Velocity = velocity;
-		
-		MoveAndSlide();
 	}
-
-	private void OnChangeDirectionTimeout()
-	{
-		Direction *= -1;
-	}
-
 }
