@@ -12,3 +12,9 @@ position = Vector2(216, 655)
 
 [node name="Poop3" parent="PoopManager" parent_id_path=PackedInt32Array(1813681663) index="2" unique_id=1940250876]
 position = Vector2(171, 671)
+
+[node name="Slime" parent="SlimeManager" parent_id_path=PackedInt32Array(1014542587) index="0" unique_id=1070573016]
+position = Vector2(180, 672)
+
+[node name="Polygon2D" parent="SlimeManager/Slime" index="2" unique_id=595509094]
+position = Vector2(-4, 0)

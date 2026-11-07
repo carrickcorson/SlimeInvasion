@@ -1,54 +1,60 @@
 using Godot;
 using System;
+using System.IO;
 
-public partial class Slime : Node2D
+public partial class Slime : CharacterBody2D
 {
-	private CharacterBody2D _body;
-	private Area2D _movementArea;
-	private AnimatedSprite2D _animatedSprite2D;
-
-	private float _speed = 10.0f;
-	private Vector2 _direction = new Vector2(1.0f, 0.0f); // moving right
+	private float _speed = 1.0f;
+	private int _direction = 1;
 	private float _gravityDivisor = 3.0f;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_body = GetNode<CharacterBody2D>("Body");
-		_animatedSprite2D = GetNode<AnimatedSprite2D>("Body/AnimatedSprite2D");
-		_movementArea = GetNode<Area2D>("MovementArea");
-		_movementArea.BodyExited += OnBodyExited;
+
+		if ((GetChildren() == null) || (GetChild(0) is not Polygon2D))
+		{
+			NodePath npath = GetPath();
+			GetTree().Quit();
+			throw new Exception("Expected Polygon2D as child of " + npath);
+		}
+	}
+
+	public override void _Process(double delta)
+	{
+		if (!_IsInBounds())
+		{
+			_direction *= -1;
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		if (Mathf.Abs(_body.Velocity.X) > 0)
+		Vector2 velocity = Velocity;
+
+		if (!IsOnFloor())
 		{
-			_animatedSprite2D.Play("move");
+			velocity += GetGravity() * (float)delta / _gravityDivisor;
 		}
-		else
-		{
-			_animatedSprite2D.Play("idle");
-		}
+		velocity.X = _speed * _direction;
+
+		Velocity = velocity;
+
+		MoveAndSlide();
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-		Vector2 velocity = _body.Velocity;
-
-		velocity += _body.GetGravity() * (float)delta / _gravityDivisor;
-		velocity.X = _direction.X * _speed;
-
-		_body.Velocity = velocity;
-        _body.MoveAndSlide();
-    }
-
-	private void OnBodyExited(Node2D body)
+	private bool _IsInBounds()
 	{
-		if (body is CharacterBody2D)
-		{
-			_direction.X *= -1.0f;
-		}
+		bool isInBounds = true;
+
+		Polygon2D movementRegion = GetNode<Polygon2D>("Polygon2D");
+
+		Vector2 position = Position;
+
+		float minX = movementRegion.Polygon[0].X;
+		float maxX = movementRegion.Polygon[1].X;
+
+		return isInBounds;
 	}
 }

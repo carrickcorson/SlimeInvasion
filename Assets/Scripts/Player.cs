@@ -8,9 +8,8 @@ public partial class Player : CharacterBody2D
 	public float speed = 30.0f;
 	[Export]
 	public float jumpVelocity = -105.0f;
-	[Export]
-	public float gravityDivisor = 3.0f;
 
+	private float _gravityDivisor = 3.0f;
 	private Vector2 _screenSize;
 	private AnimatedSprite2D _animatedSprite;
 	private bool _doubleJumpFlag = false;
@@ -160,7 +159,7 @@ public partial class Player : CharacterBody2D
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			velocity += GetGravity() * (float)delta / gravityDivisor;
+			velocity += GetGravity() * (float)delta / _gravityDivisor;
 		}
 		else
 		{

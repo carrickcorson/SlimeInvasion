@@ -1,10 +1,7 @@
-[gd_scene format=3 uid="uid://djoru4qybvi1j"]
+[gd_scene format=3 uid="uid://dar7es2wq87pd"]
 
-[ext_resource type="Script" uid="uid://v6aisjuci5vi" path="res://Assets/Scripts/Slime.cs" id="1_fqgy7"]
+[ext_resource type="Script" uid="uid://cspvplehlkdca" path="res://Assets/Scripts/Slime.cs" id="1_6lmee"]
 [ext_resource type="Texture2D" uid="uid://dwlif4n2cfunr" path="res://Assets/Art/Sprites/slime-green_16x16.png" id="2_fqgy7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4i6m"]
-size = Vector2(44, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jc4hl"]
 atlas = ExtResource("2_fqgy7")
@@ -30,7 +27,7 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("2_fqgy7")
 region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ypg8e"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jc4hl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -57,43 +54,26 @@ animations = [{
 "texture": SubResource("AtlasTexture_tauvr")
 }],
 "loop": 1,
-"name": &"move",
-"speed": 5.0
+"name": &"walk",
+"speed": 3.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8pqbh"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fqgy7"]
 radius = 3.0
 height = 10.0
 
-[node name="Slime" type="Node2D" unique_id=1599198268]
-script = ExtResource("1_fqgy7")
-
-[node name="MovementArea" type="Area2D" parent="." unique_id=1700147483]
-position = Vector2(0, -8)
-collision_layer = 16777216
-collision_mask = 2
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementArea" unique_id=1148027423]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_p4i6m")
-
-[node name="Polygon2D" type="Polygon2D" parent="MovementArea" unique_id=507429105]
-color = Color(0.25882354, 1, 1, 0.29411766)
-polygon = PackedVector2Array(-22, -3, 22, -3, 22, 13, -22, 13)
-
-[node name="Body" type="CharacterBody2D" parent="." unique_id=1085890992]
-position = Vector2(0, -8)
+[node name="Slime" type="CharacterBody2D" unique_id=1070573016]
 collision_layer = 2
 collision_mask = 769
-metadata/_edit_group_ = true
+script = ExtResource("1_6lmee")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body" unique_id=1179797837]
-sprite_frames = SubResource("SpriteFrames_ypg8e")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2084696484]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_jc4hl")
 animation = &"idle"
-frame_progress = 0.7055873
+frame_progress = 0.74647105
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=1194572366]
-position = Vector2(0, 5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2082230456]
+position = Vector2(0, -3)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_8pqbh")
+shape = SubResource("CapsuleShape2D_fqgy7")
