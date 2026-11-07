@@ -20,7 +20,7 @@ class CustomErrors
     {
         public ChildDoesNotExistException(string message) : base(message)
         {
-            new EngineTools
+            new EngineTools();
         }
     }
 }

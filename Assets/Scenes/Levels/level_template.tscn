@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b66hy86sf7bcg" path="res://Assets/Scenes/exit_portal.tscn" id="4_qhatf"]
 [ext_resource type="PackedScene" uid="uid://dpw65j1tuu18q" path="res://Assets/Scenes/poop.tscn" id="5_b6a4v"]
 [ext_resource type="PackedScene" uid="uid://dar7es2wq87pd" path="res://Assets/Scenes/slime.tscn" id="6_ipruh"]
+[ext_resource type="Script" uid="uid://duvhq6k6q2tir" path="res://Assets/Scripts/SlimeManager.cs" id="6_meny3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
 texture = ExtResource("1_0nbhp")
@@ -276,6 +277,7 @@ position = Vector2(216, 656)
 position = Vector2(168, 672)
 
 [node name="SlimeManager" type="Node2D" parent="." unique_id=1014542587]
+script = ExtResource("6_meny3")
 
 [node name="Slime" parent="SlimeManager" unique_id=1070573016 instance=ExtResource("6_ipruh")]
 position = Vector2(176, 672)

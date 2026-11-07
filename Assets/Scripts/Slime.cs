@@ -11,20 +11,12 @@ public partial class Slime : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		// Ensure that the slime has a Polygon2D movement region child
 		if ((GetChildren() == null) || (GetChild(0) is not Polygon2D))
 		{
 			NodePath npath = GetPath();
 			GetTree().Quit();
 			throw new Exception("Expected Polygon2D as child of " + npath);
-		}
-	}
-
-	public override void _Process(double delta)
-	{
-		if (!_IsInBounds())
-		{
-			_direction *= -1;
 		}
 	}
 
@@ -44,17 +36,8 @@ public partial class Slime : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	private bool _IsInBounds()
+	public void ChangeDirection()
 	{
-		bool isInBounds = true;
-
-		Polygon2D movementRegion = GetNode<Polygon2D>("Polygon2D");
-
-		Vector2 position = Position;
-
-		float minX = movementRegion.Polygon[0].X;
-		float maxX = movementRegion.Polygon[1].X;
-
-		return isInBounds;
+		_direction *= -1;
 	}
 }
